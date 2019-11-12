@@ -1,8 +1,11 @@
 package tw.org.iii.iiiandroid06;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Timer timer;
     private int i;
+    private UIHandler uiHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,18 @@ public class MainActivity extends AppCompatActivity {
         btnRight.setText(isRunning?"Stop":"Start");
 
         Log.v("brad", "start");
+        uiHandler = new UIHandler();
         timer = new Timer();
+    }
+
+    @Override
+    public void finish() {
+        if (timer != null){
+            timer.cancel();
+            timer.purge();
+            timer = null;
+        }
+        super.finish();
     }
 
     private class MyTask extends TimerTask {
@@ -43,10 +58,23 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             i++;
             Log.v("brad", "i = " + i);
-            clock.setText("" + i);
+            uiHandler.sendEmptyMessage(0);
+            //clock.setText("" + i);
         }
     }
 
+    private class UIHandler extends Handler {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            clock.setText(toClockString());
+        }
+    }
+
+    private String toClockString(){
+        
+        return "10:20:30.12";
+    }
 
     public void clickLeft(View view) {
 
