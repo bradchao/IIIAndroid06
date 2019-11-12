@@ -74,8 +74,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String toClockString(){
+        int hs = i % 100;
+        int ts = i / 100;
+        int hh = ts / (60*60);
+        int mm = (ts - hh*60*60)/60;
+        int ss = ts % 60;
+        return hh + ":" + mm + ":" + ss + "." + hs;
 
-        return "10:20:30.12";
     }
 
     public void clickLeft(View view) {
@@ -93,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void doReset(){
-        
+
     }
 
     public void clickRight(View view) {
