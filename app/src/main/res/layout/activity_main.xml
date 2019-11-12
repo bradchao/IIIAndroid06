@@ -12,7 +12,7 @@
         android:id="@+id/clock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="10:10:10.87"
+        android:text="0:0:0.0"
         android:textSize="36sp"
         android:textStyle="bold"
         android:gravity="center"

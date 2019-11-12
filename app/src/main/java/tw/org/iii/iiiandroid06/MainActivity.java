@@ -98,7 +98,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void doReset(){
-
+        i = 0;
+        uiHandler.sendEmptyMessage(0);
     }
 
     public void clickRight(View view) {
