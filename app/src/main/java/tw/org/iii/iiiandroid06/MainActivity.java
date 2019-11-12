@@ -110,11 +110,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void doLap(){
-
+        HashMap<String,String> itemData = new HashMap<>();
+        itemData.put(from[0], clock.getText().toString());
+        data.add(0, itemData);
+        adapter.notifyDataSetChanged();
     }
 
     private void doReset(){
         i = 0;
+        data.clear();
+        adapter.notifyDataSetChanged();
         uiHandler.sendEmptyMessage(0);
     }
 
