@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         Log.v("brad", "start");
         uiHandler = new UIHandler();
         timer = new Timer();
+        timer.schedule(new MyTask(), 0, 10);
+
     }
 
     @Override
@@ -56,10 +58,10 @@ public class MainActivity extends AppCompatActivity {
     private class MyTask extends TimerTask {
         @Override
         public void run() {
-            i++;
-            Log.v("brad", "i = " + i);
-            uiHandler.sendEmptyMessage(0);
-            //clock.setText("" + i);
+            if (isRunning) {
+                i++;
+                uiHandler.sendEmptyMessage(0);
+            }
         }
     }
 
@@ -72,20 +74,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String toClockString(){
-        
+
         return "10:20:30.12";
     }
 
     public void clickLeft(View view) {
+        if (isRunning){
+            // Lap
+            doLap();
+        }else{
+            // Resset
+            doReset();
+        }
+    }
 
+    private void doLap(){
 
     }
+
+    private void doReset(){
+        
+    }
+
     public void clickRight(View view) {
         isRunning = !isRunning;
         btnLeft.setText(isRunning?"Lap":"Reset");
         btnRight.setText(isRunning?"Stop":"Start");
 
-        timer.schedule(new MyTask(), 0, 10);
 
     }
 }
